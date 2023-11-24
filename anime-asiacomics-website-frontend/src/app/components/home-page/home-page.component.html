@@ -1,17 +1,17 @@
 <div class="div"></div>
 
 <section>
+
   <body>
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
         <ng-container *ngFor="let anime of animes">
           <div
             *ngIf="anime.name === 'Sword Art Online' || anime.name === 'Dragon Ball Z' || anime.name == 'Haikyuu' || anime.name == 'Naruto Shippuden' || anime.name == 'One Piece' || anime.name == 'Kimetsu no Yaiba'"
-            class="swiper-slide" [attr.data-anime-id]="anime._id" id="{{anime.name}}" (click)="onAnimeClick(anime.name)" >
-            <img
-              src="../../../assets/css/img/Capturas de episodios/One Piece/One Piece Anime.png"
-              [alt]="anime.name">
-          
+            class="swiper-slide" [attr.data-anime-id]="anime._id" id="{{anime.name}}"
+            (click)="onAnimeClick(anime.name)">
+            <img src="../../../assets/css/img/Capturas de episodios/One Piece/One Piece Anime.png" [alt]="anime.name">
+
             <div class="hover-text">
               <h6>{{ anime.name }}</h6>
               <br>
@@ -19,10 +19,12 @@
               <div class="icon" (click)="onAnimeClick(anime.name)">
                 <i class="fas fa-play m-3 icong" title="Reproducir"></i>
               </div>
-              <div class="icon1" *ngIf="decodedToken && anime && !anime.isInFavorites" (click)="addFavoriteAnime($event, anime._id)">
+              <div class="icon1" *ngIf="decodedToken && anime && !anime.isInFavorites"
+                (click)="addFavoriteAnime($event, anime._id)">
                 <i class="fa-regular fa-bookmark m-3 icong" title="AÑADIR A FAVORITOS"></i>
               </div>
-              <div class="iconfig" *ngIf="decodedToken && anime && anime.isInFavorites" (click)="removeFavoriteAnime($event, anime._id)">
+              <div class="iconfig" *ngIf="decodedToken && anime && anime.isInFavorites"
+                (click)="removeFavoriteAnime($event, anime._id)">
                 <i class="fa-regular fa-bookmark m-3 icong" title="ELIMINAR DE FAVORITOS"></i>
               </div>
               <div class="icon1" *ngIf="!decodedToken" (click)="toggleModal($event)">
@@ -82,46 +84,48 @@
 
     <div class="space"></div>
   </div>
-  
-  
+
+
   <div class="list-animes d-flex align-items-center justify-content-center">
     <ul class="row row-cols-2 row-cols-md-4 row-cols-lg-3 row-cols-xl-5 animes-emision mt-3 p-0">
       <ng-container *ngFor="let anime of animes">
-      <li class="col mb-4">
-        <a class="main_container" [attr.data-anime-id]="anime._id" id="anime.name"  (click)="onCapAnime(anime.name,1, anime._id)">
-          <img
-          [src]="'/assets/css/img/'+ anime.name + '.jpg' "
-          [alt]="anime.name">         
-          <p>{{anime.name}}</p>
-          <div class="hover-text">
-            <h6>{{anime.name}}</h6>
-            <div class="categories">
-              <div class="category" *ngFor="let category of anime.category" (click)="onAnimeClickCategory(category)">
-                {{ category }}
+        <li class="col mb-4">
+          <a class="main_container" [attr.data-anime-id]="anime._id" id="anime.name"
+            (click)="onCapAnime(anime.name,1, anime._id)">
+            <img class="image-animeCap" [src]="'/assets/css/img/'+ anime.name + '.jpg' " [alt]="anime.name">
+            <h6>{{anime.name}} Cap 1</h6>
+            <div class="hover-text">
+              <h6>{{anime.name}}</h6>
+              <div class="categories">
+                <div class="category" *ngFor="let category of anime.category" (click)="onAnimeClickCategory(category)">
+                  {{ category }}
+                </div>
               </div>
-      
+              <br>
+              <p>{{ truncateText(anime.description, 140) }}</p>
+              <div class="icon" (click)="onCapAnime(anime.name, 1, anime._id)">
+                <i class="fas fa-play m-3 icong1" title="Reproducir"></i>
+              </div>
+              <div class="icon2" *ngIf="decodedToken && !anime.isInFavorites"
+                (click)="addFavoriteAnime($event, anime._id)">
+                <i class="fa-regular fa-bookmark m-3 icong1" title="Añadir a favoritos"></i>
+              </div>
+              <div class="icon3" *ngIf="decodedToken && anime.isInFavorites"
+                (click)="addFavoriteAnime($event, anime._id)">
+                <i class="fa-regular fa-bookmark m-3 icong1" title="Añadir a favoritos"></i>
+              </div>
+              <div class="icon2" *ngIf="!decodedToken" (click)="toggleModal($event)">
+                <i class="fa-regular fa-bookmark m-3 icong1" title="Añadir a favoritos"></i>
+              </div>
             </div>
-            <br>
-            <p>{{ truncateText(anime.description, 140) }}</p>
-            <div class="icon" (click)="onCapAnime(anime.name, 1, anime._id)">
-              <i class="fas fa-play m-3 icong1" title="Reproducir"></i>
-            </div>
-            <div class="icon2" *ngIf="decodedToken && !anime.isInFavorites" (click)="addFavoriteAnime($event, anime._id)">
-              <i class="fa-regular fa-bookmark m-3 icong1" title="Añadir a favoritos"></i>
-            </div>
-            <div class="icon3" *ngIf="decodedToken && anime.isInFavorites" (click)="addFavoriteAnime($event, anime._id)">
-              <i class="fa-regular fa-bookmark m-3 icong1" title="Añadir a favoritos"></i>
-            </div>
-            <div class="icon2" *ngIf="!decodedToken" (click)="toggleModal($event)">
-              <i class="fa-regular fa-bookmark m-3 icong1" title="Añadir a favoritos"></i>
-            </div>
-          </div>
-        </a>
-      </li>
+          </a>
+
+        </li>
+
       </ng-container>
     </ul>
   </div>
-  
+
   <div class="modal" *ngIf="isModalVisible">
     <div class="modal-content">
       <span class="close" (click)="toggleModal($event)">&times;</span>

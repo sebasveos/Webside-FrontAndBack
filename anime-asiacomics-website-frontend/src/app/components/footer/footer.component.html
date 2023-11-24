@@ -11,10 +11,12 @@
                 <div class="col mt-2 about">Contactanos</div>
                 <div class="col about1">Acerca</div>
             </div>
-            <div class="col-12 col-md-4 col-lg-4">
-                Cuenta
-                <div class="col mt-2 create" [routerLink]="['/iniciar-sesion']">Crear Cuenta</div>
-                <div class="col start" [routerLink]="['/registrarse']">Acceder</div>
+            <div class="col-12 col-md-4 col-lg-4" *ngIf="!decodedToken">
+                <div >
+                    Cuenta
+                    <div class="col mt-2 create"  [routerLink]="['/registrarse']">Crear Cuenta</div>
+                    <div class="col start" [routerLink]="['/iniciar-sesion']">Acceder</div>
+                </div>
             </div>
         </div>
         <div class="line"></div>

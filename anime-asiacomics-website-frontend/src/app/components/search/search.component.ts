@@ -58,7 +58,21 @@ export class SearchComponent {
         return anime;
       }) : [];
     });
+  }
 
+  
+  checkFavoriteAnime(userId: string, animeId: string,  anime: Anime) {
+    this._userService.checkFavoriteAnime(userId, animeId).subscribe(
+      response => {
+        if (response.message === 'Anime found in favorites') {
+          this.isAnimeInFavorites = true;
+        } else if (response.message === 'Anime not found in favorites') {
+          this.isAnimeInFavorites = false;
+
+          console.log('El anime no está en favoritos');
+        }
+      },
+    )
   }
   toggleModal(event: Event) {
     event.stopPropagation(); // Evita que el evento se propague hacia arriba en la jerarquía del DOM
@@ -76,7 +90,7 @@ export class SearchComponent {
   close() {
     this.closeModal.emit();
   }
-  addFavoriteAnime(event: Event, userId: string, animeId: string){
+  addFavoriteAnime(event: Event, userId: string, animeId: string): void{
     event.stopPropagation();
 
     this._userService.addFavoriteAnime(userId, animeId).subscribe(
@@ -86,6 +100,21 @@ export class SearchComponent {
       },
       error => {
         console.error('Error al agregar el anime a favoritos', error);
+      }
+    );
+  }
+
+  removeFavoriteAnime(event: Event, animeId: string) {
+    event.stopPropagation();
+    this._userService.removeFavoriteAnime(this.decodedToken.id, animeId).subscribe(
+      response => {
+        // Realiza las acciones necesarias si es necesario
+        this.animes = this.animes.filter(anime => anime._id !== animeId);
+        this.isAnimeInFavorites = false; // Actualiza el estado según la eliminación
+        this.cdr.detectChanges(); // Forzar la detección de cambios
+      },
+      error => {
+        console.error('Error al eliminar el anime de favoritos', error);
       }
     );
   }

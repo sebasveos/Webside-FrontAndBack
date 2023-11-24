@@ -49,6 +49,7 @@ export class OneAnimeComponent {
       this.animeId = params['animeId'];
     });
     this.decodedToken = this._globalService.decodeTokenFromCookie();
+    this.checkFavoriteAnime(this.decodedToken.id, this.animeId);
 
   }
   animeClassMap: { [key: string]: string } = {
@@ -83,7 +84,7 @@ export class OneAnimeComponent {
   removeFavoriteAnime(event: Event, animeId: string) {
     event.stopPropagation();
   
-    this._userService.removeFavoriteAnime(this.userId, animeId).subscribe(
+    this._userService.removeFavoriteAnime(this.decodedToken.id, animeId).subscribe(
       response => {
         // Realiza las acciones necesarias si es necesario
         this.animes = this.animes.filter(anime => anime._id !== animeId);

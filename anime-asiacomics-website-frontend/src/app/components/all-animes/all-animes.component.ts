@@ -4,7 +4,7 @@ import { Anime } from 'src/app/models/anime';
 import { Global } from 'src/app/services/global';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/services/user.service'; 
 
 @Component({
   selector: 'app-all-animes',
@@ -33,11 +33,10 @@ export class AllAnimesComponent {
   }
   isMenuVisible = false;
   scrollPosition = 0;
-  ngOnInit() {
-    this.getAllAnimes();
-    this.decodeTokenFromCookie();
-
-  }
+    ngOnInit() {
+      this.getAllAnimes();
+      this.decodeTokenFromCookie();
+    }
   decodeTokenFromCookie() {
     const tokenCookie = this.getCookie('token'); // Reemplaza 'token' con el nombre real de tu cookie
     if (tokenCookie) {

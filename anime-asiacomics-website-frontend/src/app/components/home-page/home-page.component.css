@@ -122,6 +122,10 @@ body {
   height: 100%;
 }
 
+.image-animeCap{
+  height: 90%;
+  margin-bottom: 10px;
+}
 .main_container:hover .hover-text {
   opacity: 1.9;
 }

@@ -60,6 +60,7 @@ export class HomePageComponent implements OnInit {
         if (response.animes) {
           this.animes = response.animes;
           this.animes.forEach(anime => {
+            console.log(anime);
             this.checkFavoriteAnime(this.decodedToken.id, anime._id, anime);
           });
         }

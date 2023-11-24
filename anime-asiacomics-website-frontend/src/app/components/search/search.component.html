@@ -37,12 +37,6 @@
         <div class="icon">
           <i class="fas fa-play icong1" title="Reproducir"></i>
         </div>
-        <div class="icon2" *ngIf="decodedToken" (click)="addFavoriteAnime($event,decodedToken.id, anime.name)">
-          <i class="fa-regular fa-bookmark icong1" title="Añadir a favoritos"></i>
-        </div>
-        <div class="icon2" *ngIf="!decodedToken" (click)="toggleModal($event)">
-          <i class="fa-regular fa-bookmark icong1" title="Añadir a favoritos"></i>
-        </div>
       </div>
 
     </div>
