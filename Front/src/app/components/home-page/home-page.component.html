@@ -10,7 +10,7 @@
             *ngIf="anime.name === 'Sword Art Online' || anime.name === 'Dragon Ball Z' || anime.name == 'Haikyuu' || anime.name == 'Naruto Shippuden' || anime.name == 'One Piece' || anime.name == 'Kimetsu no Yaiba'"
             class="swiper-slide" [attr.data-anime-id]="anime._id" id="{{anime.name}}"
             (click)="onAnimeClick(anime.name)">
-            <img src="../../../assets/css/img/Capturas de episodios/One Piece/One Piece Anime.png" [alt]="anime.name">
+            <img src="assets/css/img/Capturas de episodios/One Piece/One Piece Anime.png" [alt]="anime.name">
 
             <div class="hover-text">
               <h6>{{ anime.name }}</h6>
@@ -92,7 +92,7 @@
         <li class="col mb-4">
           <a class="main_container" [attr.data-anime-id]="anime._id" id="anime.name"
             (click)="onCapAnime(anime.name,1, anime._id)">
-            <img class="image-animeCap" [src]="'/assets/css/img/'+ anime.name + '.jpg' " [alt]="anime.name">
+            <img class="image-animeCap" [src]="'assets/css/img/'+ anime.name + '.jpg' " [alt]="anime.name">
             <h6>{{anime.name}} Cap 1</h6>
             <div class="hover-text">
               <h6>{{anime.name}}</h6>
@@ -130,7 +130,7 @@
     <div class="modal-content">
       <span class="close" (click)="toggleModal($event)">&times;</span>
       <div class="image-Hinata">
-        <img src="/assets/css/img/Hinata.png">
+        <img src="assets/css/img/Hinata.png">
       </div>
       <h3>Inicia sesión o Crea una cuenta</h3>
       <p>¡Para comentar, anadir serie y peliculas a tus favoritos! Crea una cuenta de OtakuChino o inicia sesión</p>
