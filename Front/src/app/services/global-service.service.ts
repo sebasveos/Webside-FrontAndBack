@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter  } from '@angular/core';
 import jwt_decode from 'jwt-decode';
 import { UserService } from './user.service';
-import { User } from '../models/user';
 import { Anime } from '../models/anime';
 @Injectable({
   providedIn: 'root'

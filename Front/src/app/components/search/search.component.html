@@ -5,7 +5,7 @@
 </div>
 
 <div class="row p-2 d-flex align-items-center justify-content-center">
-  <div *ngFor="let anime of animes" class="col-md-4 col-lg-3 col-10 mt-5 cards" (click)="onAnimeClick(anime.name)">
+  <div *ngFor="let anime of animes" class="col-md-4 col-lg-3 col-10 mt-5 cards" (click)="onAnimeClick(anime.name, anime._id)">
     <div class="card mb-2 anime-search main_container">
       <img *ngIf="anime.name == 'Sword Art Online'" class="image"
         src="assets/css/img/Capturas de episodios/Sword Art Online/SAO Search.jpg" alt="Anime Image">

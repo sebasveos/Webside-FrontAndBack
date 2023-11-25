@@ -60,18 +60,14 @@ export class HomePageComponent implements OnInit {
         if (response.animes) {
           this.animes = response.animes;
           this.animes.forEach(anime => {
-            console.log(anime);
             this.checkFavoriteAnime(this.decodedToken.id, anime._id, anime);
           });
         }
       },
-      error => {
-        console.log('Error al obtener animes:', error);
-      }
     );
   }
 
-  checkFavoriteAnime(userId: string, animeId: string,  anime: Anime) {
+  checkFavoriteAnime(userId: string, animeId: string, anime: Anime) {
     this._userService.checkFavoriteAnime(userId, animeId).subscribe(
       response => {
         if (response.message === 'Anime found in favorites') {
@@ -85,44 +81,40 @@ export class HomePageComponent implements OnInit {
     )
   }
 
-  toggleModal(event: Event) {
-    event.stopPropagation(); // Evita que el evento se propague hacia arriba en la jerarquía del DOM
-    console.log('Clic en el ícono de favoritos');
-    // Muestra la ventana emergente
-    this.isModalVisible = !this.isModalVisible;
-    if (this.isModalVisible) {
-      this.scrollPosition = window.pageYOffset; // Almacena la posición de desplazamiento actual
-      document.body.style.overflow = ''; // Deshabilita el desplazamiento del cuerpo
-    } else {
-      document.body.style.overflow = ''; // Permite el desplazamiento del cuerpo nuevamente
-      window.scrollTo(0, this.scrollPosition); // Vuelve a la posición de desplazamiento almacenada
-    }
-  }
-  close() {
-    this.closeModal.emit();
-  }
-  
-
   addFavoriteAnime(event: Event, animeId: string): void {
     event.stopPropagation();
     const animeToAdd = this.animes.find(anime => anime._id === animeId);
     if (animeToAdd) {
-    this._userService.addFavoriteAnime(this.decodedToken.id, animeId).subscribe(
-      response => {
-        animeToAdd.isInFavorites = !animeToAdd.isInFavorites;
-        this.cdr.detectChanges(); // Forzar la detección de cambios
-      },
-      error => {
-        console.error('Error al agregar el anime a favoritos', error);
-      }
-    );
+      this._userService.addFavoriteAnime(this.decodedToken.id, animeId).subscribe(
+        response => {
+          animeToAdd.isInFavorites = !animeToAdd.isInFavorites;
+          this.cdr.detectChanges(); // Forzar la detección de cambios
+        },
+        error => {
+          console.error('Error al agregar el anime a favoritos', error);
+        }
+      );
     }
   }
-  truncateText(text: string, maxLength: number): string {
-    if (text.length > maxLength) {
-      return text.substring(0, maxLength) + '...';
+
+  removeFavoriteAnime(event: Event, animeId: string) {
+    event.stopPropagation();
+    const animeToRemove = this.animes.find(anime => anime._id === animeId);
+
+    if (animeToRemove) {
+      this._userService.removeFavoriteAnime(this.decodedToken.id, animeId).subscribe(
+        response => {
+          // Actualiza el estado de isInFavorites en el objeto anime correspondiente
+          animeToRemove.isInFavorites = false;
+          this.cdr.detectChanges(); // Forzar la detección de cambios
+        },
+        error => {
+          console.error('Error al eliminar el anime de favoritos', error);
+        }
+      );
+    } else {
+      console.error('Anime no encontrado en la lista.');
     }
-    return text;
   }
 
   onAnimeClick(name: string) {
@@ -151,26 +143,29 @@ export class HomePageComponent implements OnInit {
     }
     this._router.navigate(['/anime', name, this.animeIds]);
   }
-  removeFavoriteAnime(event: Event, animeId: string) {
-    event.stopPropagation();
-    const animeToRemove = this.animes.find(anime => anime._id === animeId);
-  
-    if (animeToRemove) {
-      this._userService.removeFavoriteAnime(this.decodedToken.id, animeId).subscribe(
-        response => {
-          // Actualiza el estado de isInFavorites en el objeto anime correspondiente
-          animeToRemove.isInFavorites = false;
-          this.cdr.detectChanges(); // Forzar la detección de cambios
-        },
-        error => {
-          console.error('Error al eliminar el anime de favoritos', error);
-        }
-      );
+
+  toggleModal(event: Event) {
+    event.stopPropagation(); // Evita que el evento se propague hacia arriba en la jerarquía del DOM
+    this.isModalVisible = !this.isModalVisible;
+    if (this.isModalVisible) {
+      this.scrollPosition = window.pageYOffset; // Almacena la posición de desplazamiento actual
+      document.body.style.overflow = ''; // Deshabilita el desplazamiento del cuerpo
     } else {
-      console.error('Anime no encontrado en la lista.');
+      document.body.style.overflow = ''; // Permite el desplazamiento del cuerpo nuevamente
+      window.scrollTo(0, this.scrollPosition); // Vuelve a la posición de desplazamiento almacenada
     }
   }
-  
+  close() {
+    this.closeModal.emit();
+  }
+
+  truncateText(text: string, maxLength: number): string {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    return text;
+  }
+
   onCapAnime(name: string, episode: number, _id: string) {
 
     // Redirige a la página del anime y pasa el ID como parámetro de la ruta

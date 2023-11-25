@@ -2,7 +2,7 @@
 
 
 <div *ngIf="urlVideo">
-    <iframe width="1238" height="400" frameborder="0" [src]="urlVideo" allowfullscreen></iframe>
+    <iframe width="1224" height="400" frameborder="0" [src]="urlVideo" allowfullscreen></iframe>
 </div>
 <br><br>
 
@@ -55,27 +55,27 @@
             <div *ngIf="checkNextEpisodeAvailable()" class="mb-2">
                 SIGUIENTE EPISODIO <br>
 
-                <div class="containerRight mt-2" (click)="navigateToEpisode(anime.name, numeroEpisodio+1 )">
+                <div class="containerRight mt-2" (click)="navigateToEpisode(anime.name, numeroEpisodio+1, anime._id )">
                     <img *ngIf="anime.name == 'Sword Art Online'"
-                        src="../../../assets/css/img/Capturas de episodios/Sword Art Online/Sword Art Online Episodes.webp"
+                        src="assets/css/img/Capturas de episodios/Sword Art Online/Sword Art Online Episodes.webp"
                         alt="">
                     <img *ngIf="anime.name == 'Captain Tsubasa'"
-                        src="../../../assets/css/img/Capturas de episodios/Captain Tsubasa/Captain Tsubada Episodes.jpe"
+                        src="assets/css/img/Capturas de episodios/Captain Tsubasa/Captain Tsubada Episodes.jpe"
                         alt="">
                     <img *ngIf="anime.name == 'Dragon Ball Z'"
-                        src="../../../assets/css/img/Capturas de episodios/Dragon Ball Z/Dragon Ball Z Episodes.jpe"
+                        src="assets/css/img/Capturas de episodios/Dragon Ball Z/Dragon Ball Z Episodes.jpe"
                         alt="">
                     <img *ngIf="anime.name == 'Inazuma Eleven'"
-                        src="../../../assets/css/img/Capturas de episodios/Inazuma Eleven/Inazuma Eleven Episodes.jpg"
+                        src="assets/css/img/Capturas de episodios/Inazuma Eleven/Inazuma Eleven Episodes.jpg"
                         alt="">
                     <img *ngIf="anime.name == 'Kimetsu no Yaiba'"
-                        src="../../../assets/css/img/Capturas de episodios/Kimetsu no Yaiba/Kimetsu Episodes.jpeg"
+                        src="assets/css/img/Capturas de episodios/Kimetsu no Yaiba/Kimetsu Episodes.jpeg"
                         alt="">
                     <img *ngIf="anime.name == 'Naruto Shippuden'"
-                        src="../../../assets/css/img/Capturas de episodios/Naruto Shippuden/3f283002b47c62b1e5d311c45f95c97e.jpe"
+                        src="assets/css/img/Capturas de episodios/Naruto Shippuden/3f283002b47c62b1e5d311c45f95c97e.jpe"
                         alt="">
                     <img *ngIf="anime.name == 'Shigatsu wa Kimi no Uso'"
-                        src="../../../assets/css/img/Capturas de episodios/Shigatsu wa Kimi no Uso/Shigatsu Episodes.jpg"
+                        src="assets/css/img/Capturas de episodios/Shigatsu wa Kimi no Uso/Shigatsu Episodes.jpg"
                         alt="">
 
                     Episodio #{{numeroEpisodio+1}}
@@ -84,27 +84,27 @@
 
             <div *ngIf="checkPreviousEpisodeAvailable()">
                 EPISODIO ANTERIOR
-                <div class="containerRight mt-2" (click)="navigateToEpisode(anime.name, numeroEpisodio-1 )">
+                <div class="containerRight mt-2" (click)="navigateToEpisode(anime.name, numeroEpisodio-1,anime._id )">
                     <img *ngIf="anime.name == 'Sword Art Online'"
-                        src="../../../assets/css/img/Capturas de episodios/Sword Art Online/Sword Art Online Episodes.webp"
+                        src="assets/css/img/Capturas de episodios/Sword Art Online/Sword Art Online Episodes.webp"
                         alt="">
                     <img *ngIf="anime.name == 'Captain Tsubasa'"
-                        src="../../../assets/css/img/Capturas de episodios/Captain Tsubasa/Captain Tsubada Episodes.jpe"
+                        src="assets/css/img/Capturas de episodios/Captain Tsubasa/Captain Tsubada Episodes.jpe"
                         alt="">
                     <img *ngIf="anime.name == 'Dragon Ball Z'"
-                        src="../../../assets/css/img/Capturas de episodios/Dragon Ball Z/Dragon Ball Z Episodes.jpe"
+                        src="assets/css/img/Capturas de episodios/Dragon Ball Z/Dragon Ball Z Episodes.jpe"
                         alt="">
                     <img *ngIf="anime.name == 'Inazuma Eleven'"
-                        src="../../../assets/css/img/Capturas de episodios/Inazuma Eleven/Inazuma Eleven Episodes.jpg"
+                        src="assets/css/img/Capturas de episodios/Inazuma Eleven/Inazuma Eleven Episodes.jpg"
                         alt="">
                     <img *ngIf="anime.name == 'Kimetsu no Yaiba'"
-                        src="../../../assets/css/img/Capturas de episodios/Kimetsu no Yaiba/Kimetsu Episodes.jpeg"
+                        src="assets/css/img/Capturas de episodios/Kimetsu no Yaiba/Kimetsu Episodes.jpeg"
                         alt="">
                     <img *ngIf="anime.name == 'Naruto Shippuden'"
-                        src="../../../assets/css/img/Capturas de episodios/Naruto Shippuden/3f283002b47c62b1e5d311c45f95c97e.jpe"
+                        src="assets/css/img/Capturas de episodios/Naruto Shippuden/3f283002b47c62b1e5d311c45f95c97e.jpe"
                         alt="">
                     <img *ngIf="anime.name == 'Shigatsu wa Kimi no Uso'"
-                        src="../../../assets/css/img/Capturas de episodios/Shigatsu wa Kimi no Uso/Shigatsu Episodes.jpg"
+                        src="assets/css/img/Capturas de episodios/Shigatsu wa Kimi no Uso/Shigatsu Episodes.jpg"
                         alt=""> Episodio #{{numeroEpisodio-1}}
                 </div>
             </div>
@@ -116,7 +116,7 @@
     <div class="modal-content">
       <span class="close" (click)="toggleModal($event)">&times;</span>
       <div class="image-Hinata">
-        <img src="../../../assets/css/img/Hinata.png">
+        <img src="assets/css/img/Hinata.png">
       </div>
       <h3>Inicia sesión o Crea una cuenta</h3>
       <p>¡Para comentar, anadir serie y peliculas a tus favoritos! Crea una cuenta de OtakuChino o inicia sesión</p>

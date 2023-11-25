@@ -4,7 +4,7 @@ import { UserService } from '../../services/user.service';
 import { UploadService } from '../../services/upload.service';
 import { Global } from '../../services/global';
 import { Router } from '@angular/router';
-import { Renderer2, ElementRef, OnInit } from '@angular/core';
+import { Renderer2, ElementRef} from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 
 

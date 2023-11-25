@@ -20,18 +20,18 @@ export class FavoriteComponent {
   public url: string;
   public showDeleteMessage: boolean = false;
 
-  constructor(   
+  constructor(
     private _router: Router,
     private _route: ActivatedRoute,
     private _userService: UserService) {
-      this.url = Global.url;
+    this.url = Global.url;
   }
   ngOnInit(): void {
     this._route.params.subscribe(params => {
       this.userId = params['id'];
       this.getAnimesFavoritesUser(this.userId);
     });
-    }
+  }
   getAnimesFavoritesUser(id: string) {
     this._userService.getAnimesFavoritesUser(id).subscribe(
       (response: any) => {
@@ -49,13 +49,13 @@ export class FavoriteComponent {
   }
   removeFavoriteAnime(event: Event, animeId: string) {
     event.stopPropagation();
-  
+
     this._userService.removeFavoriteAnime(this.userId, animeId).subscribe(
       response => {
-        this.showDeleteMessage = true; 
+        this.showDeleteMessage = true;
         setTimeout(() => {
-          this.showDeleteMessage = false; 
-        }, 3000); 
+          this.showDeleteMessage = false;
+        }, 3000);
         this.animes = this.animes.filter(anime => anime._id !== animeId);
       },
       error => {
@@ -65,7 +65,7 @@ export class FavoriteComponent {
   }
   onAnimeClick(name: string, animeId: string) {
     this._router.navigate(['/anime', name, animeId]);
-}
+  }
 }
 function jwt_decode(tokenCookie: string): { name: string; id: string; } {
   throw new Error('Function not implemented.');

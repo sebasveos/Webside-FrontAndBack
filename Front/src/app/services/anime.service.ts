@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Global } from './global';
 import { Anime } from '../models/anime';
@@ -32,7 +32,7 @@ export class AnimeService {
 
         return this._http.get(this.url + 'getAnimes/' + category, { headers: headers });
     }
-    getAllAnimes(): Observable<any>{
+    getAllAnimes(): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
         return this._http.get(this.url + 'getAllAnimes', { headers: headers });
@@ -51,6 +51,6 @@ export class AnimeService {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
         // Realiza una solicitud GET con los parámetros de búsqueda en la URL
-        return this._http.get(this.url+'searchAnimesByOptions', { params: options, headers: headers });
+        return this._http.get(this.url + 'searchAnimesByOptions', { params: options, headers: headers });
     }
 }

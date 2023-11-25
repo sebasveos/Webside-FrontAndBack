@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AnimeService } from 'src/app/services/anime.service';
 import { Global } from 'src/app/services/global';
-import { Subject, catchError, switchMap, throwError } from 'rxjs';
+import { Subject, catchError, switchMap } from 'rxjs';
 import { Anime } from 'src/app/models/anime';
 import { of } from 'rxjs';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { GlobalServiceService } from 'src/app/services/global-service.service';
 import { UserService } from 'src/app/services/user.service';
 import { ChangeDetectorRef } from '@angular/core';
@@ -60,8 +60,8 @@ export class SearchComponent {
     });
   }
 
-  
-  checkFavoriteAnime(userId: string, animeId: string,  anime: Anime) {
+
+  checkFavoriteAnime(userId: string, animeId: string, anime: Anime) {
     this._userService.checkFavoriteAnime(userId, animeId).subscribe(
       response => {
         if (response.message === 'Anime found in favorites') {
@@ -90,7 +90,7 @@ export class SearchComponent {
   close() {
     this.closeModal.emit();
   }
-  addFavoriteAnime(event: Event, userId: string, animeId: string): void{
+  addFavoriteAnime(event: Event, userId: string, animeId: string): void {
     event.stopPropagation();
 
     this._userService.addFavoriteAnime(userId, animeId).subscribe(
@@ -129,7 +129,7 @@ export class SearchComponent {
       this.animes = [];
     }
   }
-  onAnimeClick(name: string) {
-    this._router.navigate(['/anime', name]);
+  onAnimeClick(name: string, animeId: string) {
+    this._router.navigate(['/anime', name, animeId]);
   }
 }

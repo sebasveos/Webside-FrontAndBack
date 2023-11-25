@@ -1,9 +1,9 @@
 import { UserService } from '../../services/user.service';
 import { UploadService } from '../../services/upload.service';
-import { Component, Renderer2,OnInit  } from '@angular/core';
+import { Component,OnInit  } from '@angular/core';
 import { User } from '../../models/user'
 import { Global } from '../../services/global';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router} from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import { ViewportScroller } from '@angular/common';
 
@@ -27,10 +27,12 @@ export class LogInComponent implements OnInit {
     this.url = Global.url;
     this.user = new User('','', '',[]);
   }
+  
   ngOnInit(): void {
     // Desplázate a la parte superior de la página cuando se carga el componente
     this.viewportScroller.scrollToPosition([0, 0]);
   }
+
   onSubmit(form: any) {
     this._userService.authenticationUser(this.user).subscribe(
       response => {

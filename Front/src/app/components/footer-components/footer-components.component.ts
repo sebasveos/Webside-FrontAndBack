@@ -6,12 +6,12 @@ import { GlobalServiceService } from 'src/app/services/global-service.service';
   styleUrls: ['./footer-components.component.css']
 })
 export class FooterComponentsComponent {
-  public decodedToken : any;
+  public decodedToken: any;
 
   constructor(
     private _globalService: GlobalServiceService,
 
-  ){
+  ) {
 
   }
   ngOnInit() {

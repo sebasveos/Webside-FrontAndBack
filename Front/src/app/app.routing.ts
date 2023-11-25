@@ -11,7 +11,6 @@ import { SearchComponent } from "./components/search/search.component";
 import { ViewCapituleComponent } from "./components/view-capitule/view-capitule.component";
 import { AllAnimesComponent } from "./components/all-animes/all-animes.component";
 import { AcountComponent } from "./components/acount/acount.component";
-import { FooterComponentsComponent } from './components/footer-components/footer-components.component';
 
 
 const appRoutes: Routes = [
@@ -25,9 +24,7 @@ const appRoutes: Routes = [
     {path: 'registrarse', component: SignInComponent},
     {path: 'buscar', component: SearchComponent},
     {path: 'verCapitulo/:name/:episode/:_id', component: ViewCapituleComponent},
-    {path: 'cuenta', component: AcountComponent},
-    {path: 'oli', component: FooterComponentsComponent},
-
+    {path: 'cuenta', component: AcountComponent},   
 ];
 
 

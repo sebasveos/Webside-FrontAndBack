@@ -42,17 +42,17 @@ export class UserService {
     getToken() {
         return this._cookies.get("token");
     }
-    getAnimesFavoritesUser(id: string){
+    getAnimesFavoritesUser(id: string) {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
         return this._http.get(this.url + 'getAnimesFavoritesUser/' + id, { headers: headers });
     }
     removeFavoriteAnime(userId: string, animeId: string): Observable<any> {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-      
-        return this._http.post(this.url + 'removeFavoriteAnime/',{userId, animeId}, { headers: headers });
-      }
-      
+
+        return this._http.post(this.url + 'removeFavoriteAnime/', { userId, animeId }, { headers: headers });
+    }
+
     getUserLogged() {
         const token = this.getToken();
 
@@ -76,34 +76,34 @@ export class UserService {
         const headers = new HttpHeaders()
             .set('Content-Type', 'application/json')
             .set('Authorization', `Bearer ${this.getToken()}`);
-    
-        return this._http.get(this.url +'checkFavoriteAnime/'+userId+'/'+animeId, { headers: headers });
+
+        return this._http.get(this.url + 'checkFavoriteAnime/' + userId + '/' + animeId, { headers: headers });
     }
 
     get userNameUpdated$(): Observable<string> {
         return this._userNameUpdated.asObservable();
     }
 
-    updateUserName(userId: string, newUserName: string, password:string): Observable<any> {
+    updateUserName(userId: string, newUserName: string, password: string): Observable<any> {
         const headers = new HttpHeaders()
             .set('Content-Type', 'application/json')
             .set('Authorization', `Bearer ${this.getToken()}`);
-    
-            return this._http.post(this.url + 'updateUserName', { userId, newUserName, password }, { headers: headers })
+
+        return this._http.post(this.url + 'updateUserName', { userId, newUserName, password }, { headers: headers })
             .pipe(
                 tap(response => {
                     this._userNameUpdated.next(newUserName); // Emitir el nuevo nombre de usuario
                 })
-            ); 
+            );
     }
-    updatePassword(userId: string,currentPassword: string, newPassword: string, confirmPassword: string): Observable<any> {
+    updatePassword(userId: string, currentPassword: string, newPassword: string, confirmPassword: string): Observable<any> {
         const headers = new HttpHeaders()
             .set('Content-Type', 'application/json')
             .set('Authorization', `Bearer ${this.getToken()}`);
-    
-        return this._http.post(this.url +'updateUserName',{userId,currentPassword, newPassword,confirmPassword}, { headers: headers });
+
+        return this._http.post(this.url + 'updateUserName', { userId, currentPassword, newPassword, confirmPassword }, { headers: headers });
     }
-    
-    
+
+
 
 }

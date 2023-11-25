@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter  } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AnimeService } from 'src/app/services/anime.service';
 import { Route } from '@angular/router';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -28,7 +28,7 @@ export class AnimeDirectoryComponent {
     private cdr: ChangeDetectorRef,
     private _userService: UserService,
     private _globalService: GlobalServiceService,
-    private _router : Router,
+    private _router: Router,
     private _route: ActivatedRoute,
     private _animeService: AnimeService) {
 
@@ -40,26 +40,11 @@ export class AnimeDirectoryComponent {
       this.animeCategory = params['category'].split(',');
       this.getProjects(this.animeCategory);
     });
-
     this.decodedToken = this._globalService.decodeTokenFromCookie();
   }
 
-  addFavoriteAnime(event: Event, userId: string, animeId: string){
-    event.stopPropagation();
-
-    this._userService.addFavoriteAnime(userId, animeId).subscribe(
-      response => {
-        this.isAnimeInFavorites = !this.isAnimeInFavorites;
-        this.cdr.detectChanges(); // Forzar la detección de cambios
-      },
-      error => {
-        console.error('Error al agregar el anime a favoritos', error);
-      }
-    );
-  }
   toggleModal(event: Event) {
     event.stopPropagation(); // Evita que el evento se propague hacia arriba en la jerarquía del DOM
-    console.log('Clic en el ícono de favoritos');
     // Muestra la ventana emergente
     this.isModalVisible = !this.isModalVisible;
     if (this.isModalVisible) {
@@ -77,8 +62,7 @@ export class AnimeDirectoryComponent {
   getProjects(category: string) {
     this._animeService.getAnimes(category).subscribe(
       (response: any) => {
-        console.log('Datos recibidos del servidor en el componente:', response);
-        
+
         if (response.animes && Array.isArray(response.animes)) {
           this.animes = response.animes.map((anime: Anime) => {
             if (anime.image) {
@@ -95,13 +79,14 @@ export class AnimeDirectoryComponent {
       }
     );
   }
+
   truncateText(text: string, maxLength: number): string {
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + '...';
     }
     return text;
   }
-  
+
   onAnimeClick(name: string, animeId: string) {
     // Redirige a la página del anime y pasa el ID como parámetro de la ruta
     this._router.navigate(['/anime', name, animeId]);

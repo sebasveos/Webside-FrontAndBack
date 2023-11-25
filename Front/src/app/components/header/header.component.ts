@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';  // Importa el servicio Router
@@ -17,7 +17,7 @@ export class HeaderComponent {
   isSubMenuOpen: boolean = false;
 
   constructor(
-    private _userService : UserService,
+    private _userService: UserService,
     private _globalService: GlobalServiceService,
     private _router: Router,
   ) {
@@ -25,24 +25,29 @@ export class HeaderComponent {
     this.user = new User('', '', '', []);
     this._userService.userNameUpdated$.subscribe(newUserName => {
       this.decodedToken.name = newUserName; // Actualizar el nombre de usuario en el header
-  });
+    });
   }
   public isMenuVisible = false;
+
+  
+
+  ngOnInit() {
+    this.decodedToken = this._globalService.decodeTokenFromCookie();
+  }
 
   toggleMenu() {
     this.isMenuVisible = !this.isMenuVisible;
   }
-  ngOnInit() {
-    this.decodedToken = this._globalService.decodeTokenFromCookie();
-  }
+
   logout(): void {
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     this.decodedToken = null; // Clear the decoded token
-    
+
     this.toggleMenu();
-    
+
     this._router.navigate(['/pagina-principal']);
   }
+
   onLoginClick(): void {
     // Redirige a la página de inicio de sesión y agrega el fragmento 'top'
     this._router.navigate(['/iniciar-sesion'], { fragment: 'top' });

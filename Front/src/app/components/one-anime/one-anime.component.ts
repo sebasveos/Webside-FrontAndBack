@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AnimeService } from 'src/app/services/anime.service';
 import { Global } from 'src/app/services/global';
 import { Anime } from 'src/app/models/anime';
@@ -45,12 +45,10 @@ export class OneAnimeComponent {
     this._route.params.subscribe(params => {
       this.animeName = params['name'];
       this.getAnime(this.animeName);
-      this.userId = params['userId'];
       this.animeId = params['animeId'];
     });
     this.decodedToken = this._globalService.decodeTokenFromCookie();
     this.checkFavoriteAnime(this.decodedToken.id, this.animeId);
-
   }
   animeClassMap: { [key: string]: string } = {
     'Sword Art Online': 'sao',
@@ -81,9 +79,24 @@ export class OneAnimeComponent {
       }
     )
   }
+
+  addFavoriteAnime(event: Event, userId: string, animeId: string): void {
+    event.stopPropagation();
+
+    this._userService.addFavoriteAnime(userId, animeId).subscribe(
+      response => {
+        this.isAnimeInFavorites = !this.isAnimeInFavorites;
+        this.cdr.detectChanges(); // Forzar la detección de cambios
+      },
+      error => {
+        console.error('Error al agregar el anime a favoritos', error);
+      }
+    );
+  }
+
   removeFavoriteAnime(event: Event, animeId: string) {
     event.stopPropagation();
-  
+
     this._userService.removeFavoriteAnime(this.decodedToken.id, animeId).subscribe(
       response => {
         // Realiza las acciones necesarias si es necesario
@@ -96,8 +109,7 @@ export class OneAnimeComponent {
       }
     );
   }
-  
-  
+
   toggleModal(event: Event) {
     event.stopPropagation(); // Evita que el evento se propague hacia arriba en la jerarquía del DOM
     this.isModalVisible = !this.isModalVisible;
@@ -133,21 +145,7 @@ export class OneAnimeComponent {
     }
     return [];
   }
-
-  addFavoriteAnime(event: Event, userId: string, animeId: string): void {
-    event.stopPropagation();
-
-    this._userService.addFavoriteAnime(userId, animeId).subscribe(
-      response => {
-        this.isAnimeInFavorites = !this.isAnimeInFavorites;
-        this.cdr.detectChanges(); // Forzar la detección de cambios
-      },
-      error => {
-        console.error('Error al agregar el anime a favoritos', error);
-      }
-    );
-  }
-
+  
   onAnimeClick(animeCategories: string) {
 
     this._router.navigate(['/directorio-anime', animeCategories]);
